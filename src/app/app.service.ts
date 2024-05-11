@@ -6,26 +6,23 @@ import { Todo } from './todo';
   providedIn: 'root'
 })
 export class AppService {
+  baseUrl = 'http://localhost:3000/todos';
 
-  baseUrl = 'http://localhost:3000';
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http:HttpClient) { }
 
   getTodoList() {
-    return this.http.get<Todo[]>(`${this.baseUrl}/todos`);
+    return this.http.get<Todo[]>(this.baseUrl);
   }
 
   addTodo(postData: Todo) {
-    return this.http.post(`${this.baseUrl}/todos`, postData);
+    return this.http.post(this.baseUrl, postData);
   }
 
   updateTodo(postData: Todo) {
-    return this.http.patch(`${this.baseUrl}/todos/${postData.id}`, postData);
+    return this.http.patch(`${this.baseUrl}/${postData.id}`, postData);
   }
 
   deleteTodo(id: Todo['id']) {
-    return this.http.delete(`${this.baseUrl}/todos/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
-
 }
